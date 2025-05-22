@@ -84,28 +84,22 @@ function handleIntersection(entries) {
 }
 
 function handleContactFormSubmit(e) {
-    e.preventDefault();
+    // Formspree가 폼 제출을 처리하므로 기본 제출 동작을 막지 않습니다.
+    // 단, 클라이언트 측 유효성 검사만 수행합니다.
     
-    // Get form data
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const message = document.getElementById('message').value;
     
-    // Simple validation
+    // 간단한 유효성 검사
     if (!name || !email || !message) {
+        e.preventDefault();
         alert('모든 필드를 채워주세요.');
-        return;
+        return false;
     }
     
-    // You would typically send this data to a server
-    // For demo purposes, we'll just log it and show a success message
-    console.log({ name, email, message });
-    
-    // Show success message
-    alert('메시지가 성공적으로 전송되었습니다!');
-    
-    // Clear form
-    contactForm.reset();
+    // 폼이 유효하면 Formspree가 처리합니다
+    return true;
 }
 
 // Event Listeners
